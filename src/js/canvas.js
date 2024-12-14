@@ -5,19 +5,19 @@ const c = canvas.getContext('2d')
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-let gravity = 10
+let gravity = 0.5
 class Player{
   constructor(){
     this.position = {
-      x: 0,
-      y: 0
+      x: 100,
+      y: 200
     }
     this.velocity = {
-      x: 1,
-      y: 0
+      x: 0,
+      y: 1
     }
-    this.width = 100;
-    this.height = 100;
+    this.width = 30;
+    this.height = 30;
   }
 
   draw(){
@@ -27,7 +27,12 @@ class Player{
 
   update(){
     this.draw()
-    this.position.y += gravity
+    if(this.position.y + this.height + this.velocity.y <= canvas.height){
+      this.position.y += this.velocity.y
+      this.velocity.y += gravity
+    }else{
+      this.velocity.y = 0
+    }
   }
   
 }
@@ -42,11 +47,7 @@ function animate(){
   c.clearRect(0,0, canvas.width, canvas.height)
   player.update()
 
-  if(player.position.y + player.height >= canvas.height){
-    gravity = 0
-  }else{
-    gravity = 10
-  }
+  
   
 }
 
@@ -54,5 +55,11 @@ animate()
 
 
 window.addEventListener('keydown', ({keyCode}) =>{
-  console.log(keyCode)
+  console.log(keyCode)    
+  switch(keyCode){
+    case 32:
+      // barra per il salto
+      player.velocity.y -= 15
+      break;
+  }
 })
