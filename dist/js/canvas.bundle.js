@@ -21,7 +21,7 @@ var Player = /*#__PURE__*/function () {
   function Player() {
     _classCallCheck(this, Player);
     this.position = {
-      x: 100,
+      x: 150,
       y: 200
     };
     this.velocity = {
@@ -41,28 +41,64 @@ var Player = /*#__PURE__*/function () {
     key: "update",
     value: function update() {
       this.draw();
-      this.position.x -= this.velocity.x;
-      if (this.position.y + this.height + this.velocity.y <= canvas.height) {
-        this.position.y += this.velocity.y;
-        this.velocity.y += gravity;
-      } else {
-        this.velocity.y = 0;
-      }
     }
   }]);
   return Player;
 }();
+var Platform = /*#__PURE__*/function () {
+  function Platform() {
+    _classCallCheck(this, Platform);
+    this.position = {
+      x: 100,
+      y: 400
+    };
+    this.width = 200;
+    this.height = 100;
+  }
+  _createClass(Platform, [{
+    key: "draw",
+    value: function draw() {
+      c.fillStyle = 'black';
+      c.fillRect(this.position.x, this.position.y, this.width, this.height);
+    }
+  }, {
+    key: "update",
+    value: function update() {}
+  }]);
+  return Platform;
+}();
 var player = new Player();
+var platform = new Platform();
+var key = {
+  right: {
+    pressed: false
+  },
+  left: {
+    pressed: false
+  }
+};
 function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
+  platform.draw();
   player.update();
+  if (key.right.pressed) {
+    player.position.x += 10;
+  } else if (key.left.pressed) {
+    player.position.x -= 10;
+  }
+  if (player.position.y + player.height + player.velocity.y <= canvas.height && player.position.y + player.height <= platform.position.y) {
+    player.position.y += player.velocity.y;
+    player.velocity.y += gravity;
+  } else {
+    player.velocity.y = 0;
+  }
 }
 animate();
 window.addEventListener('keydown', function (_ref) {
   var _console;
   var keyCode = _ref.keyCode;
-  /* eslint-disable */(_console = console).log.apply(_console, _toConsumableArray(oo_oo("2235821830_59_2_59_22_4", keyCode)));
+  /* eslint-disable */(_console = console).log.apply(_console, _toConsumableArray(oo_oo("362662377_100_2_100_22_4", keyCode)));
   switch (keyCode) {
     case 32:
       // barra - per il salto
@@ -70,18 +106,18 @@ window.addEventListener('keydown', function (_ref) {
       break;
     case 70:
       // f - vado a destra
-      player.velocity.x -= 15;
+      key.right.pressed = true;
       break;
-    case 69:
-      // e - vado a sinistra
-      player.velocity.x += 15;
+    case 82:
+      // r - vado a sinistra
+      key.left.pressed = true;
       break;
   }
 });
 window.addEventListener('keyup', function (_ref2) {
   var _console2;
   var keyCode = _ref2.keyCode;
-  /* eslint-disable */(_console2 = console).log.apply(_console2, _toConsumableArray(oo_oo("2235821830_76_2_76_22_4", keyCode)));
+  /* eslint-disable */(_console2 = console).log.apply(_console2, _toConsumableArray(oo_oo("362662377_117_2_117_22_4", keyCode)));
   switch (keyCode) {
     case 32:
       // barra - per il salto
@@ -89,11 +125,11 @@ window.addEventListener('keyup', function (_ref2) {
       break;
     case 70:
       // f - blocco il movimento a destra
-      player.velocity.x = 0;
+      key.right.pressed = false;
       break;
-    case 69:
-      // e - vado a sinistra
-      player.velocity.x = 0;
+    case 82:
+      // r - vado a sinistra
+      key.left.pressed = false;
       break;
   }
 })
