@@ -27,6 +27,7 @@ class Player{
 
   update(){
     this.draw()
+    this.position.x -= this.velocity.x
     if(this.position.y + this.height + this.velocity.y <= canvas.height){
       this.position.y += this.velocity.y
       this.velocity.y += gravity
@@ -43,7 +44,7 @@ const player = new Player;
 function animate(){
   requestAnimationFrame(animate)
   
-  console.log('frame')
+ 
   c.clearRect(0,0, canvas.width, canvas.height)
   player.update()
 
@@ -58,8 +59,33 @@ window.addEventListener('keydown', ({keyCode}) =>{
   console.log(keyCode)    
   switch(keyCode){
     case 32:
-      // barra per il salto
-      player.velocity.y -= 15
+      // barra - per il salto
+      player.velocity.y -= 20
       break;
+    case 70:
+      // f - vado a destra
+      player.velocity.x -= 15
+      break;
+    case 69:
+      // e - vado a sinistra
+      player.velocity.x += 15
+      break;
+  }
+})
+window.addEventListener('keyup', ({keyCode}) =>{
+  console.log(keyCode)    
+  switch(keyCode){
+    case 32:
+      // barra - per il salto
+      player.velocity.y = 0
+      break;
+    case 70:
+      // f - blocco il movimento a destra
+      player.velocity.x = 0
+      break;
+    case 69:
+    // e - vado a sinistra
+    player.velocity.x = 0
+    break;
   }
 })
