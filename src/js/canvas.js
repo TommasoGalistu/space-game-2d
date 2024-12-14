@@ -1,7 +1,7 @@
 import platform from '../img/platform.png'
 import background from '../img/background.png'
 import hills from '../img/hills.png'
-import obstacle from '../img/obstacle.png'
+import obstacleImg from '../img/obstacle.png'
 import spriteRunLeft from '../img/spriteRunLeft.png'
 import spriteRunRight from '../img/spriteRunRight.png'
 import spriteStandLeft from '../img/spriteStandLeft.png'
@@ -159,7 +159,7 @@ genericObjects = [
 
 const platformImage = createImage(platform)
 
-let obstacle = new Obstacle({x: 100, y: 300, image: createImage(platform)})
+let obstacle = new Obstacle({x: 200, y: 480 - 100, image: createImage(obstacleImg)})
 let player = new Player()
 let platforms = [
   // new Platform({x: 0, y: 480, image: platformImage}),
@@ -199,7 +199,7 @@ function animate(){
     obstacle.draw()
     player.update()
    
-    // spostamenti
+    // spostamenti, parte dove si può muovere il player
     if(keys.right.pressed && player.position.x < 400){
         player.velocity.x = player.speed
     }else if(keys.left.pressed && player.position.x > 100){
@@ -214,6 +214,7 @@ function animate(){
               platforms.forEach(platform =>{
                   platform.position.x -= player.speed
               })
+              obstacle.position.x -= player.speed
               genericObjects.forEach(genericObject =>{
                   genericObject.position.x -= player.speed * .66
               })
@@ -229,7 +230,9 @@ function animate(){
                 platforms.forEach(platform =>{
                     platform.position.x += player.speed
                     
+                    
                 })
+                obstacle.position.x += player.speed
                 genericObjects.forEach(genericObject =>{
                     genericObject.position.x += player.speed * .66
                 })
@@ -245,6 +248,13 @@ function animate(){
             player.velocity.y = 0
         }
     })  
+
+    if(player.position.x + player.width >= obstacle.position.x
+      && player.position.y + player.height >= obstacle.position.y
+      
+    ){
+      player.velocity.x = 0
+    }
 
     // win 
     if(scrollOffset > 7640){
