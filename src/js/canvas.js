@@ -1,5 +1,6 @@
 import imagePlatform from '../img/platform.png';
 import background from '../img/background.png';
+import staticPlayerRight from '../img/staticPlayer.png';
 
 
 
@@ -17,22 +18,30 @@ function createImage(path){
   return image
 }
 class Player{
-  constructor(){
+  constructor({x, y, image}){
     this.position = {
-      x: 150,
-      y: 200
+      x,
+      y
     }
     this.velocity = {
       x: 0,
       y: 0
     }
-    this.width = 30;
-    this.height = 30;
+    this.width = 96;
+    this.height = image.height ;
+    this.image = image
+    this.frames = 0
+    this.sprites = {
+      stand:{
+        right: createImage(staticPlayerRight)
+        
+      }
+    }
   }
 
   draw(){
-    c.fillStyle = 'red'
-    c.fillRect(this.position.x, this.position.y, this.width, this.height)
+    
+    c.drawImage(this.image,this.position.x, this.position.y)
   }
 
   update(){
@@ -83,14 +92,25 @@ class GeneriObject{
   
 
 }
-// const typeOfPlatform = {
-//   street: x: 0, y: innerHeight - 100, image: createImage(imagePlatform)
-// }
-const player = new Player;
-const platforms = [
+
+function init(){
+  platforms = [
+    new Platform({x: 0, y: canvas.height - 80, image: createImage(imagePlatform)})
+  ];
+  genericObjects = [
+    new GeneriObject({x: 0, y: 0, image: createImage(background)})
+  ]
+  player = new Player;
+  
+}
+
+
+let imagePlayer = createImage(staticPlayerRight)
+let player = new Player({x: 150, y: 200, image: imagePlayer});
+let platforms = [
   new Platform({x: 0, y: canvas.height - 80, image: createImage(imagePlatform)})
 ];
-const genericObjects = [
+let genericObjects = [
   new GeneriObject({x: 0, y: 0, image: createImage(background)})
 ]
 
@@ -110,10 +130,14 @@ function animate(){
  c.fillStyle = 'white'
   c.fillRect(0,0, canvas.width, canvas.height)
 
+  genericObjects.forEach(genericObject =>{
+    genericObject.draw()
+  })
   
   platforms.forEach(platform =>{
     platform.draw()
   })
+
 
   
   player.update()
@@ -149,12 +173,11 @@ function animate(){
     player.velocity.y += 1 
     player.velocity.y += gravity
   }else{
-    console.log('lose')
+    init()
     
   }
   // player with platform comporment
   platforms.forEach(platform =>{
-    console.log(player.position.y + player.height + player.velocity.y, platform.position.y)
     if(player.position.y + player.height <= platform.position.y
       && player.position.y + player.height + player.velocity.y >= platform.position.y
       && player.position.x < platform.position.x + platform.width
