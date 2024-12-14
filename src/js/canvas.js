@@ -1,231 +1,298 @@
-import imagePlatform from '../img/platform.png';
-import background from '../img/background.png';
-import staticPlayerRight from '../img/staticPlayer.png';
+import platform from '../img/platform.png'
+import background from '../img/background.png'
+import hills from '../img/hills.png'
+import spriteRunLeft from '../img/spriteRunLeft.png'
+import spriteRunRight from '../img/spriteRunRight.png'
+import spriteStandLeft from '../img/spriteStandLeft.png'
+import spriteStandRight from '../img/spriteStandRight.png'
 
-
-
-const canvas = document.getElementById('canvas')
+const canvas = document.querySelector('canvas');
 
 const c = canvas.getContext('2d')
+console.log('dentro')
+canvas.width = innerWidth - 50;
+canvas.height = 600;
 
-canvas.width = 1000;
-canvas.height = 650;
+const gravity = 0.5
 
-let gravity = 0.5
-function createImage(path){
-  let image = new Image();
-  image.src = path
-  return image
+
+function createImage(imageUrl){
+    const image = new Image()
+    image.src = imageUrl
+    return image
 }
-class Player{
-  constructor({x, y, image}){
-    this.position = {
-      x,
-      y
+
+class Player {
+    constructor(){
+      this.speed = 10
+        this.position = {
+            x: 100,
+            y: 300
+        }
+        this.velocity = {
+            x: 0,
+            y: 1
+        }
+        this.width = 66
+        this.height = 150
+        this.image = createImage(spriteStandRight)
+        this.frames = 0;
+        this.sprites = {
+            stand:{
+                right: createImage(spriteStandRight),
+                left: createImage(spriteStandLeft),
+                cropWidth: 177,
+                width: 66
+            },
+            run: {
+                right: createImage(spriteRunRight),
+                left: createImage(spriteRunLeft),
+                cropWidth: 340,
+                width: 127.870
+            }
+        }
+        this.currentSprite = this.sprites.stand.right
+        this.currentCropWidth = 177
     }
-    this.velocity = {
-      x: 0,
-      y: 0
+    draw(){
+        c.drawImage(
+            this.currentSprite, 
+            this.currentCropWidth * this.frames,
+            0,
+            this.currentCropWidth,
+            400,
+            this.position.x, 
+            this.position.y,
+            this.width, 
+            this.height
+        )
     }
-    this.width = 96;
-    this.height = image.height ;
-    this.image = image
-    this.frames = 0
-    this.sprites = {
-      stand:{
-        right: createImage(staticPlayerRight)
+
+    update(){
+        this.frames++
+        if(this.frames > 28){
+            this.frames = 0
+        }
+        this.draw()
+        this.position.y += this.velocity.y
+        this.position.x += this.velocity.x
+        if(this.position.y + this.height + this.velocity. y <= canvas.height) this.velocity.y += gravity
         
+
+        
+    }
+}
+
+class Platform {
+    constructor({x, y, image}){
+        this.position = {
+            x,
+            y
+        }
+        this.image = image
+        this.width = image.width
+        this.height = image.height
+
+    }
+
+    draw(){
+        c.drawImage(this.image, this.position.x, this.position.y)
+
+    }
+}
+class GenericObject {
+  constructor({x, y, image}){
+      this.position = {
+          x,
+          y
       }
-    }
+      this.image = image
+      this.width = image.width
+      this.height = image.height
+
   }
 
   draw(){
-    
-    c.drawImage(this.image,this.position.x, this.position.y)
-  }
+      c.drawImage(this.image, this.position.x, this.position.y)
 
-  update(){
-    this.draw()
-    
-    this.position.x += this.velocity.x;
-    this.position.y += this.velocity.y
-    
-   
   }
-  
 }
-
-class Platform{
-  constructor({x, y, image}){
-    this.position = {
-      x,
-      y
-    }
-    this.width = 400;
-    this.height = 50;
-    this.image = image
-  }
-
-  draw(){
-    // c.fillStyle = 'black'
-    c.drawImage(this.image, this.position.x, this.position.y)
-  }
-
-  
-}
-
-class GeneriObject{
-  constructor({x, y, image}){
-    this.position = {
-      x,
-      y
-    }
-    this.width = image.width;
-    this.height = image.height
-    this.image = image
-  }
-  draw(){
-    // c.fillStyle = 'black'
-    c.drawImage(this.image, this.position.x, this.position.y)
-  }
-
-  
-
-}
-
 function init(){
+  player = new Player()
+  
   platforms = [
-    new Platform({x: 0, y: canvas.height - 80, image: createImage(imagePlatform)})
-  ];
-  genericObjects = [
-    new GeneriObject({x: 0, y: 0, image: createImage(background)})
-  ]
-  player = new Player;
+    new Platform({x: 0, y: 480, image: platformImage}),
+    new Platform({x: platformImage.width, y: 480, image: platformImage}),
+    new Platform({x: platformImage.width * 2, y: 480, image: platformImage}),
+    new Platform({x: platformImage.width * 3, y: 480, image: platformImage}),
+    new Platform({x: platformImage.width * 4 + 100, y: 480, image: platformImage}),
+         
+                  ]
+    genericObjects = [
+        new GenericObject({x: -1, y: -1, image: createImage(background)}),
+        new GenericObject({x: -1, y: -1, image: createImage(hills)})
+    ]
+                
+  player.update()
+  scrollOffset = 0
+  
+
   
 }
 
+const platformImage = createImage(platform)
 
-let imagePlayer = createImage(staticPlayerRight)
-let player = new Player({x: 150, y: 200, image: imagePlayer});
+
+let player = new Player()
 let platforms = [
-  new Platform({x: 0, y: canvas.height - 80, image: createImage(imagePlatform)})
-];
+    new Platform({x: 0, y: 480, image: platformImage}),
+    new Platform({x: platformImage.width, y: 480, image: platformImage}),
+    new Platform({x: platformImage.width * 2, y: 480, image: platformImage}),
+    new Platform({x: platformImage.width * 3, y: 480, image: platformImage}),
+    new Platform({x: platformImage.width * 4 + 100, y: 480, image: platformImage}),
+    new Platform({x: platformImage.width * 5 + 200, y: 480, image: platformImage}),
+    new Platform({x: platformImage.width * 6 + 350, y: 480, image: platformImage}),
+    new Platform({x: platformImage.width * 7 + 350, y: 350, image: platformImage}),
+                  ]
+
 let genericObjects = [
-  new GeneriObject({x: 0, y: 0, image: createImage(background)})
+    new GenericObject({x: -1, y: -1, image: createImage(background)}),
+    new GenericObject({x: 5, y: 5, image: createImage(hills)})
 ]
 
-const key = {
-  right:{
-    pressed: false
-  },
-  left:{
-    pressed: false
-  },
-  
-}
-let position = 0
+player.update()
+let scrollOffset = 0
+
 function animate(){
-  requestAnimationFrame(animate)
-  
- c.fillStyle = 'white'
-  c.fillRect(0,0, canvas.width, canvas.height)
+    requestAnimationFrame(animate)
+    
+    c.fillStyle = 'white'
+    c.fillRect(0, 0, canvas.width, canvas.height)
 
-  genericObjects.forEach(genericObject =>{
-    genericObject.draw()
-  })
-  
-  platforms.forEach(platform =>{
-    platform.draw()
-  })
-
-
-  
-  player.update()
-  
-  platforms.forEach(platform =>{
-    player.velocity.x = 0
-    // define a limin of player
-    if(key.right.pressed && player.position.x <= canvas.width / 2 + 50){
-      player.velocity.x += 10
-      
-    }else if(key.left.pressed && player.position.x >= 100){
-      player.velocity.x -= 10
+    genericObjects.forEach(genericObject =>{
+        genericObject.draw()
+    })
+    // creazione platform
+    platforms.forEach(platform =>{
+        platform.draw()
+    })
+    player.update()
+   
+    // spostamenti
+    if(keys.right.pressed && player.position.x < 400){
+        player.velocity.x = player.speed
+    }else if(keys.left.pressed && player.position.x > 100){
+        player.velocity.x = -player.speed
     }else{
-        // the player stay in the center zone and the platform move
-      if(key.right.pressed){
-        platform.position.x -= 10
-      }else if(key.left.pressed){
-        // if the platform arrive at start this condition stack the platform
-        if(platform.position.x < 0){
-          
-          platform.position.x += 10
-
+        player.velocity.x = 0
+        if(keys.right.pressed){
+            scrollOffset += player.speed
+            platforms.forEach(platform =>{
+                platform.position.x -= player.speed
+            })
+            genericObjects.forEach(genericObject =>{
+                genericObject.position.x -= player.speed * .66
+            })
+            
         }
-      }
+        if(scrollOffset >=10){
+
+            if(keys.left.pressed){
+                scrollOffset -= player.speed
+                platforms.forEach(platform =>{
+                    platform.position.x += player.speed
+                    
+                })
+                genericObjects.forEach(genericObject =>{
+                    genericObject.position.x += player.speed * .66
+                })
+            }
+        }
     }
-    
-    
+    // platform comportment
+    platforms.forEach(platform =>{
+        if(player.position.y + player.height <= platform.position.y 
+            && player.position.y + player.height + player.velocity.y >= platform.position.y
+            && player.position.x + player.width >= platform.position.x
+            && player.position.x <= platform.position.x + platform.width){
+            player.velocity.y = 0
+        }
+    })  
 
-  })
-
-  // player with canva limit
-  if(player.position.y + player.height + player.velocity.y <= canvas.height){
-    player.velocity.y += 1 
-    player.velocity.y += gravity
-  }else{
-    init()
-    
-  }
-  // player with platform comporment
-  platforms.forEach(platform =>{
-    if(player.position.y + player.height <= platform.position.y
-      && player.position.y + player.height + player.velocity.y >= platform.position.y
-      && player.position.x < platform.position.x + platform.width
-      && player.position.x + player.width > platform.position.x
-     ){
-      player.velocity.y = 0
-      
+    // win 
+    if(scrollOffset > 2000){
+        console.log('you win')
     }
-  
 
-  })
-  
-  
+    // lose
+    if(player.position.y > canvas.height){
+      init()
+    }
 }
-
+const keys = {
+    right: {
+        pressed: false
+    },
+    left: {
+        pressed: false
+    }
+}
 animate()
 
-
-window.addEventListener('keydown', ({keyCode}) =>{
-    
-  switch(keyCode){
-    case 32:
-      // barra - per il salto
-      player.velocity.y -= 20
-      break;
-    case 70:
-      // f - vado a destra
-      key.right.pressed = true
-      break;
-    case 82:
-      // r - vado a sinistra
-      key.left.pressed = true
-      break;
-  }
+addEventListener('keydown', ({keyCode}) =>{
+   console.log(keyCode)
+    switch(keyCode){
+        case 82:
+            // left a
+            keys.left.pressed = true
+            player.currentSprite = player.sprites.run.left
+            player.currentCropWidth = player.sprites.run.cropWidth
+            player.width = player.sprites.run.width
+            break
+        case 83:
+            // down s
+            break
+        case 70:
+            // right a
+            keys.right.pressed = true
+            player.currentSprite = player.sprites.run.right
+            player.currentCropWidth = player.sprites.run.cropWidth
+            player.width = player.sprites.run.width
+            break
+        case 32:
+            // up a
+            player.velocity.y -= 10
+            break
+        
+            
+    }
 })
-window.addEventListener('keyup', ({keyCode}) =>{
-  switch(keyCode){
-    case 32:
-      // barra - per il salto
-      player.velocity.y = 0
-      break;
-    case 70:
-      // f - blocco il movimento a destra
-      key.right.pressed = false
-      break;
-    case 82:
-    // r - vado a sinistra
-      key.left.pressed = false
-    break;
-  }
+
+addEventListener('keyup', ({keyCode}) =>{
+    console.log(keyCode)
+    switch(keyCode){
+        case 82:
+            // left a
+            keys.left.pressed = false
+            player.currentSprite = player.sprites.stand.left
+            player.currentCropWidth = player.sprites.stand.cropWidth
+            player.width = player.sprites.stand.width
+            break
+        case 83:
+            // down s
+            break
+        case 70:
+            // right a
+            keys.right.pressed = false
+            player.currentSprite = player.sprites.stand.right
+            player.currentCropWidth = player.sprites.stand.cropWidth
+            player.width = player.sprites.stand.width
+            // dd
+            break
+        case 32:
+            // up a
+            player.velocity.y = 0
+            break
+            
+    }
 })
