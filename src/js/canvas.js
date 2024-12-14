@@ -1,6 +1,7 @@
 import platform from '../img/platform.png'
 import background from '../img/background.png'
 import hills from '../img/hills.png'
+import obstacle from '../img/obstacle.png'
 import spriteRunLeft from '../img/spriteRunLeft.png'
 import spriteRunRight from '../img/spriteRunRight.png'
 import spriteStandLeft from '../img/spriteStandLeft.png'
@@ -9,7 +10,6 @@ import spriteStandRight from '../img/spriteStandRight.png'
 const canvas = document.querySelector('canvas');
 
 const c = canvas.getContext('2d')
-console.log('dentro')
 canvas.width = innerWidth - 50;
 canvas.height = 600;
 
@@ -117,22 +117,39 @@ class GenericObject {
 
   }
 }
+
+class Obstacle {
+  constructor({x, y, image}){
+    this.position = {
+        x,
+        y
+    }
+    this.image = image
+    this.width = image.width
+    this.height = image.height
+
+}
+
+draw(){
+    c.drawImage(this.image, this.position.x, this.position.y)
+
+}
+}
 function init(){
   player = new Player()
-  
-  platforms = [
-    new Platform({x: 0, y: 480, image: platformImage}),
-    new Platform({x: platformImage.width, y: 480, image: platformImage}),
-    new Platform({x: platformImage.width * 2, y: 480, image: platformImage}),
-    new Platform({x: platformImage.width * 3, y: 480, image: platformImage}),
-    new Platform({x: platformImage.width * 4 + 100, y: 480, image: platformImage}),
-         
-                  ]
-    genericObjects = [
-        new GenericObject({x: -1, y: -1, image: createImage(background)}),
-        new GenericObject({x: -1, y: -1, image: createImage(hills)})
-    ]
-                
+  platforms = []
+  for (let i = 0; i < 100; i++) {
+    platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
+    
+  }
+
+genericObjects = [
+    new GenericObject({x: -1, y: -1, image: createImage(background)}),
+    new GenericObject({x: 5, y: 5, image: createImage(hills)})
+]
+       
+
+
   player.update()
   scrollOffset = 0
   
@@ -142,18 +159,21 @@ function init(){
 
 const platformImage = createImage(platform)
 
-
+let obstacle = new Obstacle({x: 100, y: 300, image: createImage(platform)})
 let player = new Player()
 let platforms = [
-    new Platform({x: 0, y: 480, image: platformImage}),
-    new Platform({x: platformImage.width, y: 480, image: platformImage}),
-    new Platform({x: platformImage.width * 2, y: 480, image: platformImage}),
-    new Platform({x: platformImage.width * 3, y: 480, image: platformImage}),
-    new Platform({x: platformImage.width * 4 + 100, y: 480, image: platformImage}),
-    new Platform({x: platformImage.width * 5 + 200, y: 480, image: platformImage}),
-    new Platform({x: platformImage.width * 6 + 350, y: 480, image: platformImage}),
-    new Platform({x: platformImage.width * 7 + 350, y: 350, image: platformImage}),
-                  ]
+  // new Platform({x: 0, y: 480, image: platformImage}),
+  // new Platform({x: platformImage.width, y: 480, image: platformImage}),
+  // new Platform({x: platformImage.width * 2 , y: 480 + 100, image: platformImage}),
+  // new Platform({x: platformImage.width * 3, y: 480, image: platformImage}),
+  // new Platform({x: platformImage.width * 4 + 160, y: 480, image: platformImage}),
+  // new Platform({x: platformImage.width * 5 + 160, y: 480, image: platformImage}),
+  // new Platform({x: platformImage.width * 6 + 160, y: 480, image: platformImage}),
+]
+for (let i = 0; i < 100; i++) {
+  platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
+  
+}
 
 let genericObjects = [
     new GenericObject({x: -1, y: -1, image: createImage(background)}),
@@ -176,6 +196,7 @@ function animate(){
     platforms.forEach(platform =>{
         platform.draw()
     })
+    obstacle.draw()
     player.update()
    
     // spostamenti
@@ -185,16 +206,22 @@ function animate(){
         player.velocity.x = -player.speed
     }else{
         player.velocity.x = 0
-        if(keys.right.pressed){
-            scrollOffset += player.speed
-            platforms.forEach(platform =>{
-                platform.position.x -= player.speed
-            })
-            genericObjects.forEach(genericObject =>{
-                genericObject.position.x -= player.speed * .66
-            })
-            
+       
+        
+        if(scrollOffset < 7640){
+          if(keys.right.pressed){
+              scrollOffset += player.speed
+              platforms.forEach(platform =>{
+                  platform.position.x -= player.speed
+              })
+              genericObjects.forEach(genericObject =>{
+                  genericObject.position.x -= player.speed * .66
+              })
+              
+          }
+
         }
+        
         if(scrollOffset >=10){
 
             if(keys.left.pressed){
@@ -220,7 +247,7 @@ function animate(){
     })  
 
     // win 
-    if(scrollOffset > 2000){
+    if(scrollOffset > 7640){
         console.log('you win')
     }
 
@@ -240,7 +267,6 @@ const keys = {
 animate()
 
 addEventListener('keydown', ({keyCode}) =>{
-   console.log(keyCode)
     switch(keyCode){
         case 82:
             // left a
@@ -269,7 +295,6 @@ addEventListener('keydown', ({keyCode}) =>{
 })
 
 addEventListener('keyup', ({keyCode}) =>{
-    console.log(keyCode)
     switch(keyCode){
         case 82:
             // left a
