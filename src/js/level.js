@@ -27,14 +27,17 @@ export function fistLevel(){
     ]
     for (let i = 0; i < 100; i++) {
     //   platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
-      platforms.push(new Platform({x: (platformImage.width) * i  , y: 480, image: platformImage}),)
+      platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
       
     }
     let genericObjects = [
         new GenericObject({x: -1, y: -1, image: backgroundImg}),
         new GenericObject({x: 5, y: 5, image: hillsImg})
     ]
+    let player = new Player
     
-    return [obstacles, platforms, genericObjects]
+    return [obstacles, platforms, genericObjects, player]
 
 }
+
+

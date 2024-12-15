@@ -290,30 +290,24 @@ var c = canvas.getContext('2d');
 canvas.width = innerWidth - 50;
 canvas.height = 600;
 var gravity = 0.5;
-
-// function init(){
-//   player = new Player()
-//   platforms = []
-//   for (let i = 0; i < 100; i++) {
-//     platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
-
-//   }
-
-// genericObjects = [
-//     new GenericObject({x: -1, y: -1, image: createImage(background)}),
-//     new GenericObject({x: 5, y: 5, image: createImage(hills)})
-// ]
-
-//   player.update()
-//   scrollOffset = 0
-
-// }
-var player = new _Player_js__WEBPACK_IMPORTED_MODULE_11__.Player();
-var _fistLevel = (0,_level_js__WEBPACK_IMPORTED_MODULE_10__.fistLevel)(),
-  _fistLevel2 = _slicedToArray(_fistLevel, 3),
-  obstacles = _fistLevel2[0],
-  platforms = _fistLevel2[1],
-  genericObjects = _fistLevel2[2];
+function init(level) {
+  switch (level) {
+    case 'fistLevel':
+      var _fistLevel = (0,_level_js__WEBPACK_IMPORTED_MODULE_10__.fistLevel)();
+      var _fistLevel2 = _slicedToArray(_fistLevel, 4);
+      obstacles = _fistLevel2[0];
+      platforms = _fistLevel2[1];
+      genericObjects = _fistLevel2[2];
+      player = _fistLevel2[3];
+      break;
+  }
+}
+var _fistLevel3 = (0,_level_js__WEBPACK_IMPORTED_MODULE_10__.fistLevel)(),
+  _fistLevel4 = _slicedToArray(_fistLevel3, 4),
+  obstacles = _fistLevel4[0],
+  platforms = _fistLevel4[1],
+  genericObjects = _fistLevel4[2],
+  player = _fistLevel4[3];
 player.update();
 var scrollOffset = 0;
 function animate() {
@@ -408,12 +402,12 @@ function animate() {
   // win 
   if (scrollOffset > 7640) {
     var _console;
-    /* eslint-disable */(_console = console).log.apply(_console, _toConsumableArray(oo_oo("1588841008_195_8_195_30_4", 'you win')));
+    /* eslint-disable */(_console = console).log.apply(_console, _toConsumableArray(oo_oo("3457908641_184_8_184_30_4", 'you win')));
   }
 
   // lose
   if (player.position.y > canvas.height) {
-    init();
+    init('fistLevel');
   }
 }
 var keys = {
@@ -455,7 +449,7 @@ addEventListener('keydown', function (_ref) {
       keys.jump.pressed = true;
       player.velocity.y -= 20;
       /* eslint-disable */
-      (_console2 = console).log.apply(_console2, _toConsumableArray(oo_oo("1588841008_240_14_240_45_4", player.velocity.y)));
+      (_console2 = console).log.apply(_console2, _toConsumableArray(oo_oo("3457908641_229_14_229_45_4", player.velocity.y)));
       break;
   }
 });
@@ -611,7 +605,7 @@ function fistLevel() {
   for (var i = 0; i < 100; i++) {
     //   platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
     platforms.push(new _Platform_js__WEBPACK_IMPORTED_MODULE_10__.Platform({
-      x: platformImage.width * i,
+      x: (platformImage.width + 190) * i,
       y: 480,
       image: platformImage
     }));
@@ -625,7 +619,8 @@ function fistLevel() {
     y: 5,
     image: hillsImg
   })];
-  return [obstacles, platforms, genericObjects];
+  var player = new _Player_js__WEBPACK_IMPORTED_MODULE_9__.Player();
+  return [obstacles, platforms, genericObjects, player];
 }
 
 /***/ }),

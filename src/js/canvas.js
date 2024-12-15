@@ -28,29 +28,18 @@ canvas.height = 600;
 
 export const gravity = 0.5
 
-// function init(){
-//   player = new Player()
-//   platforms = []
-//   for (let i = 0; i < 100; i++) {
-//     platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
-    
-//   }
+function init(level){
 
-// genericObjects = [
-//     new GenericObject({x: -1, y: -1, image: createImage(background)}),
-//     new GenericObject({x: 5, y: 5, image: createImage(hills)})
-// ]
-       
+    switch(level){
+        case 'fistLevel':
+            [obstacles, platforms, genericObjects, player] = fistLevel()
+            break;
+    }
+}
 
 
-//   player.update()
-//   scrollOffset = 0
-  
 
-  
-// }
-let player = new Player()
-let [obstacles, platforms, genericObjects] = fistLevel()
+let [obstacles, platforms, genericObjects, player] = fistLevel()
 
 player.update()
 let scrollOffset = 0
@@ -197,7 +186,7 @@ function animate(){
 
     // lose
     if(player.position.y > canvas.height){
-      init()
+      init('fistLevel')
     }
 }
 const keys = {
