@@ -19,17 +19,7 @@ import {GenericObject} from './GenericObject.js'
 
 
 
-// import platform from '../img/platform.png'
-// import background from '../img/background.png'
-// import hills from '../img/hills.png'
-// import obstacleImg from '../img/obstacle.png'
-// import spriteRunLeft from '../img/spriteRunLeft.png'
-// import spriteRunRight from '../img/spriteRunRight.png'
-// import spriteStandLeft from '../img/spriteStandLeft.png'
-// import spriteStandRight from '../img/spriteStandRight.png'
 
-let [array1, array2, array3] = fistLevel()
-console.log(array1, array2, array3)
 export const canvas = document.querySelector('canvas');
 
 export const c = canvas.getContext('2d')
@@ -38,178 +28,29 @@ canvas.height = 600;
 
 export const gravity = 0.5
 
-
-// function createImage(imageUrl){
-//     const image = new Image()
-//     image.src = imageUrl
-//     return image
-// }
-
-// class Player {
-//     constructor(){
-//       this.speed = 10
-//         this.position = {
-//             x: 100,
-//             y: 300
-//         }
-//         this.velocity = {
-//             x: 0,
-//             y: 1
-//         }
-//         this.width = 66
-//         this.height = 150
-//         this.image = createImage(spriteStandRight)d
-//         this.frames = 0;
-//         this.sprites = {
-//             stand:{
-//                 right: createImage(spriteStandRight),
-//                 left: createImage(spriteStandLeft),
-//                 cropWidth: 177,
-//                 width: 66
-//             },
-//             run: {
-//                 right: createImage(spriteRunRight),
-//                 left: createImage(spriteRunLeft),
-//                 cropWidth: 340,
-//                 width: 127.870
-//             }
-//         }
-//         this.currentSprite = this.sprites.stand.right
-//         this.currentCropWidth = 177
-//     }
-//     draw(){
-//         c.drawImage(
-//             this.currentSprite, 
-//             this.currentCropWidth * this.frames,
-//             0,
-//             this.currentCropWidth,
-//             400,
-//             this.position.x, 
-//             this.position.y,
-//             this.width, 
-//             this.height
-//         )
-//     }
-
-//     update(){
-//         this.frames++
-//         if(this.frames > 28){
-//             this.frames = 0
-//         }
-//         this.draw()
-//         this.position.y += this.velocity.y
-//         this.position.x += this.velocity.x
-//         if(this.position.y + this.height + this.velocity. y <= canvas.height) this.velocity.y += gravity
-        
-
-        
-//     }
-// }
-
-// class Platform {
-//     constructor({x, y, image}){
-//         this.position = {
-//             x,
-//             y
-//         }
-//         this.image = image
-//         this.width = image.width
-//         this.height = image.height
-
-//     }
-
-//     draw(){
-//         c.drawImage(this.image, this.position.x, this.position.y)
-
-//     }
-// }
-// class GenericObject {
-//   constructor({x, y, image}){
-//       this.position = {
-//           x,
-//           y
-//       }
-//       this.image = image
-//       this.width = image.width
-//       this.height = image.height
-
-//   }
-
-//   draw(){
-//       c.drawImage(this.image, this.position.x, this.position.y)
-
-//   }
-// }
-
-// class Obstacle {
-//   constructor({x, y, image}){
-//     this.position = {
-//         x,
-//         y
-//     }
-//     this.image = image
-//     this.width = image.width
-//     this.height = image.height
-
-// }
-
-// draw(){
-//     c.drawImage(this.image, this.position.x, this.position.y)
-
-// }
-// }
-function init(){
-  player = new Player()
-  platforms = []
-  for (let i = 0; i < 100; i++) {
-    platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
+// function init(){
+//   player = new Player()
+//   platforms = []
+//   for (let i = 0; i < 100; i++) {
+//     platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
     
-  }
+//   }
 
-genericObjects = [
-    new GenericObject({x: -1, y: -1, image: createImage(background)}),
-    new GenericObject({x: 5, y: 5, image: createImage(hills)})
-]
+// genericObjects = [
+//     new GenericObject({x: -1, y: -1, image: createImage(background)}),
+//     new GenericObject({x: 5, y: 5, image: createImage(hills)})
+// ]
        
 
 
-  player.update()
-  scrollOffset = 0
+//   player.update()
+//   scrollOffset = 0
   
 
   
-}
-
-const platformImage = createImage(platform)
-
-let obstacles = [
-    new Obstacle({x: 500, y: 270, image: createImage(obstacleImg)}),
-    // new Obstacle({x: 700, y: 300, image: createImage(obstacleImg)}),
-    
-       
-
-]
+// }
 let player = new Player()
-let platforms = [
-
-  // new Platform({x: 0, y: 480, image: platformImage}),
-  // new Platform({x: platformImage.width, y: 480, image: platformImage}),
-  // new Platform({x: platformImage.width * 2 , y: 480 + 100, image: platformImage}),
-  // new Platform({x: platformImage.width * 3, y: 480, image: platformImage}),
-  // new Platform({x: platformImage.width * 4 + 160, y: 480, image: platformImage}),
-  // new Platform({x: platformImage.width * 5 + 160, y: 480, image: platformImage}),
-  // new Platform({x: platformImage.width * 6 + 160, y: 480, image: platformImage}),
-]
-for (let i = 0; i < 100; i++) {
-//   platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
-  platforms.push(new Platform({x: (platformImage.width) * i  , y: 480, image: platformImage}),)
-  
-}
-
-let genericObjects = [
-    new GenericObject({x: -1, y: -1, image: createImage(background)}),
-    new GenericObject({x: 5, y: 5, image: createImage(hills)})
-]
+let [obstacles, platforms, genericObjects] = fistLevel()
 
 player.update()
 let scrollOffset = 0

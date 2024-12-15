@@ -260,7 +260,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Platform_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Platform.js */ "./src/js/Platform.js");
 /* harmony import */ var _Obstacle_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Obstacle.js */ "./src/js/Obstacle.js");
 /* harmony import */ var _GenericObject_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./GenericObject.js */ "./src/js/GenericObject.js");
-var _console;
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
@@ -286,203 +285,35 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-// import platform from '../img/platform.png'
-// import background from '../img/background.png'
-// import hills from '../img/hills.png'
-// import obstacleImg from '../img/obstacle.png'
-// import spriteRunLeft from '../img/spriteRunLeft.png'
-// import spriteRunRight from '../img/spriteRunRight.png'
-// import spriteStandLeft from '../img/spriteStandLeft.png'
-// import spriteStandRight from '../img/spriteStandRight.png'
-var _fistLevel = (0,_level_js__WEBPACK_IMPORTED_MODULE_10__.fistLevel)(),
-  _fistLevel2 = _slicedToArray(_fistLevel, 3),
-  array1 = _fistLevel2[0],
-  array2 = _fistLevel2[1],
-  array3 = _fistLevel2[2];
-/* eslint-disable */
-(_console = console).log.apply(_console, _toConsumableArray(oo_oo("3524557429_32_0_32_35_4", array1, array2, array3)));
 var canvas = document.querySelector('canvas');
 var c = canvas.getContext('2d');
 canvas.width = innerWidth - 50;
 canvas.height = 600;
 var gravity = 0.5;
 
-// function createImage(imageUrl){
-//     const image = new Image()
-//     image.src = imageUrl
-//     return image
-// }
-
-// class Player {
-//     constructor(){
-//       this.speed = 10
-//         this.position = {
-//             x: 100,
-//             y: 300
-//         }
-//         this.velocity = {
-//             x: 0,
-//             y: 1
-//         }
-//         this.width = 66
-//         this.height = 150
-//         this.image = createImage(spriteStandRight)d
-//         this.frames = 0;
-//         this.sprites = {
-//             stand:{
-//                 right: createImage(spriteStandRight),
-//                 left: createImage(spriteStandLeft),
-//                 cropWidth: 177,
-//                 width: 66
-//             },
-//             run: {
-//                 right: createImage(spriteRunRight),
-//                 left: createImage(spriteRunLeft),
-//                 cropWidth: 340,
-//                 width: 127.870
-//             }
-//         }
-//         this.currentSprite = this.sprites.stand.right
-//         this.currentCropWidth = 177
-//     }
-//     draw(){
-//         c.drawImage(
-//             this.currentSprite, 
-//             this.currentCropWidth * this.frames,
-//             0,
-//             this.currentCropWidth,
-//             400,
-//             this.position.x, 
-//             this.position.y,
-//             this.width, 
-//             this.height
-//         )
-//     }
-
-//     update(){
-//         this.frames++
-//         if(this.frames > 28){
-//             this.frames = 0
-//         }
-//         this.draw()
-//         this.position.y += this.velocity.y
-//         this.position.x += this.velocity.x
-//         if(this.position.y + this.height + this.velocity. y <= canvas.height) this.velocity.y += gravity
-
-//     }
-// }
-
-// class Platform {
-//     constructor({x, y, image}){
-//         this.position = {
-//             x,
-//             y
-//         }
-//         this.image = image
-//         this.width = image.width
-//         this.height = image.height
-
-//     }
-
-//     draw(){
-//         c.drawImage(this.image, this.position.x, this.position.y)
-
-//     }
-// }
-// class GenericObject {
-//   constructor({x, y, image}){
-//       this.position = {
-//           x,
-//           y
-//       }
-//       this.image = image
-//       this.width = image.width
-//       this.height = image.height
+// function init(){
+//   player = new Player()
+//   platforms = []
+//   for (let i = 0; i < 100; i++) {
+//     platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
 
 //   }
 
-//   draw(){
-//       c.drawImage(this.image, this.position.x, this.position.y)
+// genericObjects = [
+//     new GenericObject({x: -1, y: -1, image: createImage(background)}),
+//     new GenericObject({x: 5, y: 5, image: createImage(hills)})
+// ]
 
-//   }
-// }
-
-// class Obstacle {
-//   constructor({x, y, image}){
-//     this.position = {
-//         x,
-//         y
-//     }
-//     this.image = image
-//     this.width = image.width
-//     this.height = image.height
+//   player.update()
+//   scrollOffset = 0
 
 // }
-
-// draw(){
-//     c.drawImage(this.image, this.position.x, this.position.y)
-
-// }
-// }
-function init() {
-  player = new _Player_js__WEBPACK_IMPORTED_MODULE_11__.Player();
-  platforms = [];
-  for (var i = 0; i < 100; i++) {
-    platforms.push(new _Platform_js__WEBPACK_IMPORTED_MODULE_12__.Platform({
-      x: (platformImage.width + 190) * i,
-      y: 480,
-      image: platformImage
-    }));
-  }
-  genericObjects = [new _GenericObject_js__WEBPACK_IMPORTED_MODULE_14__.GenericObject({
-    x: -1,
-    y: -1,
-    image: (0,_function_js__WEBPACK_IMPORTED_MODULE_8__.createImage)(_img_background_png__WEBPACK_IMPORTED_MODULE_1__["default"])
-  }), new _GenericObject_js__WEBPACK_IMPORTED_MODULE_14__.GenericObject({
-    x: 5,
-    y: 5,
-    image: (0,_function_js__WEBPACK_IMPORTED_MODULE_8__.createImage)(_img_hills_png__WEBPACK_IMPORTED_MODULE_2__["default"])
-  })];
-  player.update();
-  scrollOffset = 0;
-}
-var platformImage = (0,_function_js__WEBPACK_IMPORTED_MODULE_8__.createImage)(_img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"]);
-var obstacles = [new _Obstacle_js__WEBPACK_IMPORTED_MODULE_13__.Obstacle({
-  x: 500,
-  y: 270,
-  image: (0,_function_js__WEBPACK_IMPORTED_MODULE_8__.createImage)(_img_obstacle_png__WEBPACK_IMPORTED_MODULE_3__["default"])
-})
-// new Obstacle({x: 700, y: 300, image: createImage(obstacleImg)}),
-];
 var player = new _Player_js__WEBPACK_IMPORTED_MODULE_11__.Player();
-var platforms = [
-
-  // new Platform({x: 0, y: 480, image: platformImage}),
-  // new Platform({x: platformImage.width, y: 480, image: platformImage}),
-  // new Platform({x: platformImage.width * 2 , y: 480 + 100, image: platformImage}),
-  // new Platform({x: platformImage.width * 3, y: 480, image: platformImage}),
-  // new Platform({x: platformImage.width * 4 + 160, y: 480, image: platformImage}),
-  // new Platform({x: platformImage.width * 5 + 160, y: 480, image: platformImage}),
-  // new Platform({x: platformImage.width * 6 + 160, y: 480, image: platformImage}),
-];
-for (var i = 0; i < 100; i++) {
-  //   platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
-  platforms.push(new _Platform_js__WEBPACK_IMPORTED_MODULE_12__.Platform({
-    x: platformImage.width * i,
-    y: 480,
-    image: platformImage
-  }));
-}
-var genericObjects = [new _GenericObject_js__WEBPACK_IMPORTED_MODULE_14__.GenericObject({
-  x: -1,
-  y: -1,
-  image: (0,_function_js__WEBPACK_IMPORTED_MODULE_8__.createImage)(_img_background_png__WEBPACK_IMPORTED_MODULE_1__["default"])
-}), new _GenericObject_js__WEBPACK_IMPORTED_MODULE_14__.GenericObject({
-  x: 5,
-  y: 5,
-  image: (0,_function_js__WEBPACK_IMPORTED_MODULE_8__.createImage)(_img_hills_png__WEBPACK_IMPORTED_MODULE_2__["default"])
-})];
+var _fistLevel = (0,_level_js__WEBPACK_IMPORTED_MODULE_10__.fistLevel)(),
+  _fistLevel2 = _slicedToArray(_fistLevel, 3),
+  obstacles = _fistLevel2[0],
+  platforms = _fistLevel2[1],
+  genericObjects = _fistLevel2[2];
 player.update();
 var scrollOffset = 0;
 function animate() {
@@ -576,8 +407,8 @@ function animate() {
 
   // win 
   if (scrollOffset > 7640) {
-    var _console2;
-    /* eslint-disable */(_console2 = console).log.apply(_console2, _toConsumableArray(oo_oo("3524557429_354_8_354_30_4", 'you win')));
+    var _console;
+    /* eslint-disable */(_console = console).log.apply(_console, _toConsumableArray(oo_oo("1588841008_195_8_195_30_4", 'you win')));
   }
 
   // lose
@@ -598,7 +429,7 @@ var keys = {
 };
 animate();
 addEventListener('keydown', function (_ref) {
-  var _console3;
+  var _console2;
   var keyCode = _ref.keyCode;
   switch (keyCode) {
     case 82:
@@ -624,7 +455,7 @@ addEventListener('keydown', function (_ref) {
       keys.jump.pressed = true;
       player.velocity.y -= 20;
       /* eslint-disable */
-      (_console3 = console).log.apply(_console3, _toConsumableArray(oo_oo("3524557429_399_14_399_45_4", player.velocity.y)));
+      (_console2 = console).log.apply(_console2, _toConsumableArray(oo_oo("1588841008_240_14_240_45_4", player.velocity.y)));
       break;
   }
 });
@@ -738,11 +569,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   fistLevel: () => (/* binding */ fistLevel)
 /* harmony export */ });
+/* harmony import */ var _img_platform_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../img/platform.png */ "./src/img/platform.png");
+/* harmony import */ var _img_background_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../img/background.png */ "./src/img/background.png");
+/* harmony import */ var _img_hills_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/hills.png */ "./src/img/hills.png");
+/* harmony import */ var _img_obstacle_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/obstacle.png */ "./src/img/obstacle.png");
+/* harmony import */ var _img_spriteRunLeft_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/spriteRunLeft.png */ "./src/img/spriteRunLeft.png");
+/* harmony import */ var _img_spriteRunRight_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../img/spriteRunRight.png */ "./src/img/spriteRunRight.png");
+/* harmony import */ var _img_spriteStandLeft_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../img/spriteStandLeft.png */ "./src/img/spriteStandLeft.png");
+/* harmony import */ var _img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../img/spriteStandRight.png */ "./src/img/spriteStandRight.png");
+/* harmony import */ var _function_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./function.js */ "./src/js/function.js");
+/* harmony import */ var _Player_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Player.js */ "./src/js/Player.js");
+/* harmony import */ var _Platform_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Platform.js */ "./src/js/Platform.js");
+/* harmony import */ var _Obstacle_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Obstacle.js */ "./src/js/Obstacle.js");
+/* harmony import */ var _GenericObject_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./GenericObject.js */ "./src/js/GenericObject.js");
+
+
+
+
+
+
+
+
+
+
+
+
+
 function fistLevel() {
-  var array1 = [1];
-  var array2 = [2];
-  var array3 = [3];
-  return [array1, array2, array3];
+  var platformImage = (0,_function_js__WEBPACK_IMPORTED_MODULE_8__.createImage)(_img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"]);
+  var obstacleImage = (0,_function_js__WEBPACK_IMPORTED_MODULE_8__.createImage)(_img_obstacle_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  var backgroundImg = (0,_function_js__WEBPACK_IMPORTED_MODULE_8__.createImage)(_img_background_png__WEBPACK_IMPORTED_MODULE_1__["default"]);
+  var hillsImg = (0,_function_js__WEBPACK_IMPORTED_MODULE_8__.createImage)(_img_hills_png__WEBPACK_IMPORTED_MODULE_2__["default"]);
+  var obstacles = [new _Obstacle_js__WEBPACK_IMPORTED_MODULE_11__.Obstacle({
+    x: 500,
+    y: 270,
+    image: obstacleImage
+  })
+  // new Obstacle({x: 700, y: 300, image: createImage(obstacleImg)}),
+  ];
+  var platforms = [];
+  for (var i = 0; i < 100; i++) {
+    //   platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
+    platforms.push(new _Platform_js__WEBPACK_IMPORTED_MODULE_10__.Platform({
+      x: platformImage.width * i,
+      y: 480,
+      image: platformImage
+    }));
+  }
+  var genericObjects = [new _GenericObject_js__WEBPACK_IMPORTED_MODULE_12__.GenericObject({
+    x: -1,
+    y: -1,
+    image: backgroundImg
+  }), new _GenericObject_js__WEBPACK_IMPORTED_MODULE_12__.GenericObject({
+    x: 5,
+    y: 5,
+    image: hillsImg
+  })];
+  return [obstacles, platforms, genericObjects];
 }
 
 /***/ }),
