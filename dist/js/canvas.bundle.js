@@ -294,22 +294,29 @@ function init(level) {
   switch (level) {
     case 'fistLevel':
       var _fistLevel = (0,_level_js__WEBPACK_IMPORTED_MODULE_10__.fistLevel)();
-      var _fistLevel2 = _slicedToArray(_fistLevel, 4);
+      var _fistLevel2 = _slicedToArray(_fistLevel, 5);
       obstacles = _fistLevel2[0];
       platforms = _fistLevel2[1];
       genericObjects = _fistLevel2[2];
       player = _fistLevel2[3];
+      scrollOffset = _fistLevel2[4];
       break;
   }
+  //   
+  //   
+  //   
+
+  //   player.update()
+  //   scrollOffset = 0
 }
 var _fistLevel3 = (0,_level_js__WEBPACK_IMPORTED_MODULE_10__.fistLevel)(),
-  _fistLevel4 = _slicedToArray(_fistLevel3, 4),
+  _fistLevel4 = _slicedToArray(_fistLevel3, 5),
   obstacles = _fistLevel4[0],
   platforms = _fistLevel4[1],
   genericObjects = _fistLevel4[2],
-  player = _fistLevel4[3];
+  player = _fistLevel4[3],
+  scrollOffset = _fistLevel4[4];
 player.update();
-var scrollOffset = 0;
 function animate() {
   requestAnimationFrame(animate);
   c.fillStyle = 'white';
@@ -402,7 +409,7 @@ function animate() {
   // win 
   if (scrollOffset > 7640) {
     var _console;
-    /* eslint-disable */(_console = console).log.apply(_console, _toConsumableArray(oo_oo("3457908641_184_8_184_30_4", 'you win')));
+    /* eslint-disable */(_console = console).log.apply(_console, _toConsumableArray(oo_oo("2270914506_197_8_197_30_4", 'you win')));
   }
 
   // lose
@@ -449,7 +456,7 @@ addEventListener('keydown', function (_ref) {
       keys.jump.pressed = true;
       player.velocity.y -= 20;
       /* eslint-disable */
-      (_console2 = console).log.apply(_console2, _toConsumableArray(oo_oo("3457908641_229_14_229_45_4", player.velocity.y)));
+      (_console2 = console).log.apply(_console2, _toConsumableArray(oo_oo("2270914506_242_14_242_45_4", player.velocity.y)));
       break;
   }
 });
@@ -594,14 +601,19 @@ function fistLevel() {
   var obstacleImage = (0,_function_js__WEBPACK_IMPORTED_MODULE_8__.createImage)(_img_obstacle_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
   var backgroundImg = (0,_function_js__WEBPACK_IMPORTED_MODULE_8__.createImage)(_img_background_png__WEBPACK_IMPORTED_MODULE_1__["default"]);
   var hillsImg = (0,_function_js__WEBPACK_IMPORTED_MODULE_8__.createImage)(_img_hills_png__WEBPACK_IMPORTED_MODULE_2__["default"]);
-  var obstacles = [new _Obstacle_js__WEBPACK_IMPORTED_MODULE_11__.Obstacle({
-    x: 500,
-    y: 270,
+  var obstacles = [];
+  var platforms = [];
+  var genericObjects = [];
+  var player = new _Player_js__WEBPACK_IMPORTED_MODULE_9__.Player();
+  var scrollOffset = 0;
+  obstacles = [new _Obstacle_js__WEBPACK_IMPORTED_MODULE_11__.Obstacle({
+    x: 1000,
+    y: 400,
     image: obstacleImage
   })
   // new Obstacle({x: 700, y: 300, image: createImage(obstacleImg)}),
   ];
-  var platforms = [];
+  platforms = [];
   for (var i = 0; i < 100; i++) {
     //   platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
     platforms.push(new _Platform_js__WEBPACK_IMPORTED_MODULE_10__.Platform({
@@ -610,7 +622,7 @@ function fistLevel() {
       image: platformImage
     }));
   }
-  var genericObjects = [new _GenericObject_js__WEBPACK_IMPORTED_MODULE_12__.GenericObject({
+  genericObjects = [new _GenericObject_js__WEBPACK_IMPORTED_MODULE_12__.GenericObject({
     x: -1,
     y: -1,
     image: backgroundImg
@@ -619,8 +631,7 @@ function fistLevel() {
     y: 5,
     image: hillsImg
   })];
-  var player = new _Player_js__WEBPACK_IMPORTED_MODULE_9__.Player();
-  return [obstacles, platforms, genericObjects, player];
+  return [obstacles, platforms, genericObjects, player, scrollOffset];
 }
 
 /***/ }),

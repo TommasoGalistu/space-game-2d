@@ -29,20 +29,33 @@ canvas.height = 600;
 export const gravity = 0.5
 
 function init(level){
-
+    
     switch(level){
         case 'fistLevel':
-            [obstacles, platforms, genericObjects, player] = fistLevel()
+            [obstacles, platforms, genericObjects, player, scrollOffset] = fistLevel()
             break;
     }
+//   
+//   
+//   
+
+
+       
+
+
+//   player.update()
+//   scrollOffset = 0
+  
+
+  
 }
 
 
 
-let [obstacles, platforms, genericObjects, player] = fistLevel()
-
+let [obstacles, platforms, genericObjects, player, scrollOffset] = fistLevel()
 player.update()
-let scrollOffset = 0
+
+
 
 
 function animate(){

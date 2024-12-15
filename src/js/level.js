@@ -19,24 +19,30 @@ export function fistLevel(){
     const obstacleImage = createImage(obstacleImg)
     const backgroundImg = createImage(background)
     const hillsImg =  createImage(hills)
-    let obstacles = [
-        new Obstacle({x: 500, y: 270, image: obstacleImage}),
+    let obstacles = [];
+    let platforms = [];
+    let genericObjects = []
+    let player = new Player
+    let scrollOffset = 0
+    
+    obstacles = [
+        new Obstacle({x: 1000, y: 400, image: obstacleImage}),
         // new Obstacle({x: 700, y: 300, image: createImage(obstacleImg)}),
     ]
-    let platforms = [
+    platforms = [
     ]
     for (let i = 0; i < 100; i++) {
     //   platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
       platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
       
     }
-    let genericObjects = [
+    genericObjects = [
         new GenericObject({x: -1, y: -1, image: backgroundImg}),
         new GenericObject({x: 5, y: 5, image: hillsImg})
     ]
-    let player = new Player
     
-    return [obstacles, platforms, genericObjects, player]
+    
+    return [obstacles, platforms, genericObjects, player, scrollOffset]
 
 }
 
