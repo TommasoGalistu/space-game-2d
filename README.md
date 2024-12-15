@@ -69,7 +69,10 @@ Obiettivo
 
 Arriva alla fine del percorso senza cadere! 🎮
 
-Link al gioco: 
+A breve inserirò il link di gioco, per adesso puoi clonare la repository e esegui questi due comendi:
+
+1. npm install
+2. npm start
 
 Questa versione del gioco può essere facilmente espansa aggiungendo nuovi livelli, ostacoli, nemici o miglioramenti grafici. Il progetto è perfetto per comprendere concetti come:
 
