@@ -159,9 +159,16 @@ genericObjects = [
 
 const platformImage = createImage(platform)
 
-let obstacle = new Obstacle({x: 200, y: 480 - 100, image: createImage(obstacleImg)})
+let obstacles = [
+    new Obstacle({x: 500, y: 350, image: createImage(obstacleImg)}),
+    // new Obstacle({x: 700, y: 300, image: createImage(obstacleImg)}),
+    
+       
+
+]
 let player = new Player()
 let platforms = [
+
   // new Platform({x: 0, y: 480, image: platformImage}),
   // new Platform({x: platformImage.width, y: 480, image: platformImage}),
   // new Platform({x: platformImage.width * 2 , y: 480 + 100, image: platformImage}),
@@ -171,7 +178,8 @@ let platforms = [
   // new Platform({x: platformImage.width * 6 + 160, y: 480, image: platformImage}),
 ]
 for (let i = 0; i < 100; i++) {
-  platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
+//   platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
+  platforms.push(new Platform({x: (platformImage.width) * i  , y: 480, image: platformImage}),)
   
 }
 
@@ -196,7 +204,10 @@ function animate(){
     platforms.forEach(platform =>{
         platform.draw()
     })
-    obstacle.draw()
+    obstacles.forEach(obstacle => {
+        obstacle.draw()
+        
+    });
     player.update()
    
     // spostamenti, parte dove si può muovere il player
@@ -214,7 +225,10 @@ function animate(){
               platforms.forEach(platform =>{
                   platform.position.x -= player.speed
               })
-              obstacle.position.x -= player.speed
+              obstacles.forEach(obstacle =>{
+                  obstacle.position.x -= player.speed
+
+              })
               genericObjects.forEach(genericObject =>{
                   genericObject.position.x -= player.speed * .66
               })
@@ -232,7 +246,11 @@ function animate(){
                     
                     
                 })
-                obstacle.position.x += player.speed
+                obstacles.forEach(obstacle =>{
+                    obstacle.position.x += player.speed
+  
+                })
+                
                 genericObjects.forEach(genericObject =>{
                     genericObject.position.x += player.speed * .66
                 })
@@ -245,16 +263,40 @@ function animate(){
             && player.position.y + player.height + player.velocity.y >= platform.position.y
             && player.position.x + player.width >= platform.position.x
             && player.position.x <= platform.position.x + platform.width){
+
             player.velocity.y = 0
+            obstacles.forEach(obstacle =>{
+                
+                if(player.position.x + player.width + player.velocity.x >= obstacle.position.x
+                   && player.position.x - player.velocity.x <= obstacle.position.x + obstacle.width 
+                   && player.position.y + player.height >= obstacle.position.y
+                    
+                ){
+                    player.velocity.x = 0
+                }
+            })
+        }else{
+            obstacles.forEach(obstacle =>{
+                if(player.position.y + player.height <= obstacle.position.y 
+                    && player.position.y + player.height + player.velocity.y >= obstacle.position.y
+                    && player.position.x + player.width >= obstacle.position.x
+                    && player.position.x <= obstacle.position.x + obstacle.width){
+        
+                    player.velocity.y = 0
+                }
+                if(player.position.x + player.width + player.velocity.x >= obstacle.position.x
+                    && player.position.x - player.velocity.x <= obstacle.position.x + obstacle.width 
+                    && player.position.y + player.height >= obstacle.position.y
+                     
+                 ){
+                     player.velocity.x = 0
+                 }
+                
+            })
+
         }
     })  
-
-    if(player.position.x + player.width >= obstacle.position.x
-      && player.position.y + player.height >= obstacle.position.y
-      
-    ){
-      player.velocity.x = 0
-    }
+    
 
     // win 
     if(scrollOffset > 7640){
