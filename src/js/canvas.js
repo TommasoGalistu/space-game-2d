@@ -7,134 +7,157 @@ import spriteRunRight from '../img/spriteRunRight.png'
 import spriteStandLeft from '../img/spriteStandLeft.png'
 import spriteStandRight from '../img/spriteStandRight.png'
 
-const canvas = document.querySelector('canvas');
+import {createImage} from './function.js'
 
-const c = canvas.getContext('2d')
+import {assets} from './assets.js'
+import {fistLevel} from './level.js'
+import {Player} from './Player.js'
+import {Platform} from './Platform.js'
+import {Obstacle} from './Obstacle.js'
+import {GenericObject} from './GenericObject.js'
+
+
+
+
+// import platform from '../img/platform.png'
+// import background from '../img/background.png'
+// import hills from '../img/hills.png'
+// import obstacleImg from '../img/obstacle.png'
+// import spriteRunLeft from '../img/spriteRunLeft.png'
+// import spriteRunRight from '../img/spriteRunRight.png'
+// import spriteStandLeft from '../img/spriteStandLeft.png'
+// import spriteStandRight from '../img/spriteStandRight.png'
+
+let [array1, array2, array3] = fistLevel()
+console.log(array1, array2, array3)
+export const canvas = document.querySelector('canvas');
+
+export const c = canvas.getContext('2d')
 canvas.width = innerWidth - 50;
 canvas.height = 600;
 
-const gravity = 0.5
+export const gravity = 0.5
 
 
-function createImage(imageUrl){
-    const image = new Image()
-    image.src = imageUrl
-    return image
-}
+// function createImage(imageUrl){
+//     const image = new Image()
+//     image.src = imageUrl
+//     return image
+// }
 
-class Player {
-    constructor(){
-      this.speed = 10
-        this.position = {
-            x: 100,
-            y: 300
-        }
-        this.velocity = {
-            x: 0,
-            y: 1
-        }
-        this.width = 66
-        this.height = 150
-        this.image = createImage(spriteStandRight)
-        this.frames = 0;
-        this.sprites = {
-            stand:{
-                right: createImage(spriteStandRight),
-                left: createImage(spriteStandLeft),
-                cropWidth: 177,
-                width: 66
-            },
-            run: {
-                right: createImage(spriteRunRight),
-                left: createImage(spriteRunLeft),
-                cropWidth: 340,
-                width: 127.870
-            }
-        }
-        this.currentSprite = this.sprites.stand.right
-        this.currentCropWidth = 177
-    }
-    draw(){
-        c.drawImage(
-            this.currentSprite, 
-            this.currentCropWidth * this.frames,
-            0,
-            this.currentCropWidth,
-            400,
-            this.position.x, 
-            this.position.y,
-            this.width, 
-            this.height
-        )
-    }
+// class Player {
+//     constructor(){
+//       this.speed = 10
+//         this.position = {
+//             x: 100,
+//             y: 300
+//         }
+//         this.velocity = {
+//             x: 0,
+//             y: 1
+//         }
+//         this.width = 66
+//         this.height = 150
+//         this.image = createImage(spriteStandRight)d
+//         this.frames = 0;
+//         this.sprites = {
+//             stand:{
+//                 right: createImage(spriteStandRight),
+//                 left: createImage(spriteStandLeft),
+//                 cropWidth: 177,
+//                 width: 66
+//             },
+//             run: {
+//                 right: createImage(spriteRunRight),
+//                 left: createImage(spriteRunLeft),
+//                 cropWidth: 340,
+//                 width: 127.870
+//             }
+//         }
+//         this.currentSprite = this.sprites.stand.right
+//         this.currentCropWidth = 177
+//     }
+//     draw(){
+//         c.drawImage(
+//             this.currentSprite, 
+//             this.currentCropWidth * this.frames,
+//             0,
+//             this.currentCropWidth,
+//             400,
+//             this.position.x, 
+//             this.position.y,
+//             this.width, 
+//             this.height
+//         )
+//     }
 
-    update(){
-        this.frames++
-        if(this.frames > 28){
-            this.frames = 0
-        }
-        this.draw()
-        this.position.y += this.velocity.y
-        this.position.x += this.velocity.x
-        if(this.position.y + this.height + this.velocity. y <= canvas.height) this.velocity.y += gravity
+//     update(){
+//         this.frames++
+//         if(this.frames > 28){
+//             this.frames = 0
+//         }
+//         this.draw()
+//         this.position.y += this.velocity.y
+//         this.position.x += this.velocity.x
+//         if(this.position.y + this.height + this.velocity. y <= canvas.height) this.velocity.y += gravity
         
 
         
-    }
-}
+//     }
+// }
 
-class Platform {
-    constructor({x, y, image}){
-        this.position = {
-            x,
-            y
-        }
-        this.image = image
-        this.width = image.width
-        this.height = image.height
+// class Platform {
+//     constructor({x, y, image}){
+//         this.position = {
+//             x,
+//             y
+//         }
+//         this.image = image
+//         this.width = image.width
+//         this.height = image.height
 
-    }
+//     }
 
-    draw(){
-        c.drawImage(this.image, this.position.x, this.position.y)
+//     draw(){
+//         c.drawImage(this.image, this.position.x, this.position.y)
 
-    }
-}
-class GenericObject {
-  constructor({x, y, image}){
-      this.position = {
-          x,
-          y
-      }
-      this.image = image
-      this.width = image.width
-      this.height = image.height
+//     }
+// }
+// class GenericObject {
+//   constructor({x, y, image}){
+//       this.position = {
+//           x,
+//           y
+//       }
+//       this.image = image
+//       this.width = image.width
+//       this.height = image.height
 
-  }
+//   }
 
-  draw(){
-      c.drawImage(this.image, this.position.x, this.position.y)
+//   draw(){
+//       c.drawImage(this.image, this.position.x, this.position.y)
 
-  }
-}
+//   }
+// }
 
-class Obstacle {
-  constructor({x, y, image}){
-    this.position = {
-        x,
-        y
-    }
-    this.image = image
-    this.width = image.width
-    this.height = image.height
+// class Obstacle {
+//   constructor({x, y, image}){
+//     this.position = {
+//         x,
+//         y
+//     }
+//     this.image = image
+//     this.width = image.width
+//     this.height = image.height
 
-}
+// }
 
-draw(){
-    c.drawImage(this.image, this.position.x, this.position.y)
+// draw(){
+//     c.drawImage(this.image, this.position.x, this.position.y)
 
-}
-}
+// }
+// }
 function init(){
   player = new Player()
   platforms = []
