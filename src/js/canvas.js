@@ -183,7 +183,7 @@ genericObjects = [
 const platformImage = createImage(platform)
 
 let obstacles = [
-    new Obstacle({x: 500, y: 350, image: createImage(obstacleImg)}),
+    new Obstacle({x: 500, y: 270, image: createImage(obstacleImg)}),
     // new Obstacle({x: 700, y: 300, image: createImage(obstacleImg)}),
     
        
@@ -214,6 +214,7 @@ let genericObjects = [
 player.update()
 let scrollOffset = 0
 
+
 function animate(){
     requestAnimationFrame(animate)
     
@@ -232,7 +233,8 @@ function animate(){
         
     });
     player.update()
-   
+
+    
     // spostamenti, parte dove si può muovere il player
     if(keys.right.pressed && player.position.x < 400){
         player.velocity.x = player.speed
@@ -240,8 +242,9 @@ function animate(){
         player.velocity.x = -player.speed
     }else{
         player.velocity.x = 0
-       
         
+       
+        // se sono dentro l'area di movimento si spostano gli oggetti simulando il movimento a destra
         if(scrollOffset < 7640){
           if(keys.right.pressed){
               scrollOffset += player.speed
@@ -259,7 +262,8 @@ function animate(){
           }
 
         }
-        
+
+        // se sono dentro l'area di movimento si spostano gli oggetti simulando il movimento a sinistra
         if(scrollOffset >=10){
 
             if(keys.left.pressed){
@@ -280,26 +284,49 @@ function animate(){
             }
         }
     }
+
     // platform comportment
     platforms.forEach(platform =>{
+        // se sono sulla piattaforma si ferma la gravità
         if(player.position.y + player.height <= platform.position.y 
             && player.position.y + player.height + player.velocity.y >= platform.position.y
             && player.position.x + player.width >= platform.position.x
             && player.position.x <= platform.position.x + platform.width){
 
             player.velocity.y = 0
+            
             obstacles.forEach(obstacle =>{
                 
-                if(player.position.x + player.width + player.velocity.x >= obstacle.position.x
-                   && player.position.x - player.velocity.x <= obstacle.position.x + obstacle.width 
-                   && player.position.y + player.height >= obstacle.position.y
-                    
-                ){
-                    player.velocity.x = 0
-                }
+
+            // lo blocco lateralmente se incontro un ostacolo
+                
+            if(player.position.x + player.width + player.velocity.x >= obstacle.position.x
+                && player.position.x < obstacle.position.x + obstacle.width
+                && player.position.y <= obstacle.position.y + obstacle.height
+            ){
+                player.velocity.x = 0
+            }
+
+            // ostacolo in offset il giocatore si ferma
+            if(player.position.x  <= obstacle.position.x + obstacle.width &&
+                player.position.x + player.width >= obstacle.position.x
+                && player.position.y <= obstacle.position.y + obstacle.height
+            ){
+                player.velocity.x = 0; 
+            }
+                
+                
+
+                
+                
+                
             })
+            
         }else{
+            
+            // se non sono sulla piattaforma
             obstacles.forEach(obstacle =>{
+            //     // se sono sopra l'ostacolo e se esco a destra o a sinistra
                 if(player.position.y + player.height <= obstacle.position.y 
                     && player.position.y + player.height + player.velocity.y >= obstacle.position.y
                     && player.position.x + player.width >= obstacle.position.x
@@ -307,14 +334,15 @@ function animate(){
         
                     player.velocity.y = 0
                 }
-                if(player.position.x + player.width + player.velocity.x >= obstacle.position.x
-                    && player.position.x - player.velocity.x <= obstacle.position.x + obstacle.width 
-                    && player.position.y + player.height >= obstacle.position.y
-                     
-                 ){
-                     player.velocity.x = 0
-                 }
-                
+                // lo blocco se salta sotto l'ostacolo
+                if(keys.jump.pressed &&
+                    player.position.y <= obstacle.position.y + obstacle.height &&
+                    player.position.x <= obstacle.position.x + obstacle.width &&
+                    player.position.x + player.width >= obstacle.position.x &&
+                    player.position.y + player.height >= obstacle.position.y
+                ){
+                  player.velocity.y = 0
+                }
             })
 
         }
@@ -336,6 +364,9 @@ const keys = {
         pressed: false
     },
     left: {
+        pressed: false
+    },
+    jump: {
         pressed: false
     }
 }
@@ -362,7 +393,10 @@ addEventListener('keydown', ({keyCode}) =>{
             break
         case 32:
             // up a
-            player.velocity.y -= 10
+            
+            keys.jump.pressed = true
+              player.velocity.y -= 20
+              console.log(player.velocity.y )
             break
         
             
@@ -391,6 +425,7 @@ addEventListener('keyup', ({keyCode}) =>{
             break
         case 32:
             // up a
+            keys.jump.pressed = false
             player.velocity.y = 0
             break
             
