@@ -3,6 +3,7 @@ import background from '../img/background.png'
 import hills from '../img/hills.png'
 import obstacleImg from '../img/obstacle.png'
 import flag from '../img/flag.png'
+import playerComand from '../img/playercommand.png'
 import spriteRunLeft from '../img/spriteRunLeft.png'
 import spriteRunRight from '../img/spriteRunRight.png'
 import spriteStandLeft from '../img/spriteStandLeft.png'
@@ -21,6 +22,7 @@ export function fistLevel(){
     const backgroundImg = createImage(background)
     const hillsImg =  createImage(hills)
     const endImg = createImage(flag)
+    const playerComandImg = createImage(playerComand)
     let obstacles = [];
     let platforms = [];
     let genericObjects = []
@@ -50,7 +52,8 @@ export function fistLevel(){
     genericObjects = [
         new GenericObject({x: -1, y: -1, image: backgroundImg}),
         new GenericObject({x: 5, y: 5, image: hillsImg}),
-        new GenericObject({x: 7000, y: 400, image: endImg})
+        new GenericObject({x: 7000, y: 400, image: endImg}),
+        new GenericObject({x: 5, y: 10, image: playerComandImg})
     ]
     
     

@@ -584,15 +584,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _img_hills_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/hills.png */ "./src/img/hills.png");
 /* harmony import */ var _img_obstacle_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/obstacle.png */ "./src/img/obstacle.png");
 /* harmony import */ var _img_flag_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../img/flag.png */ "./src/img/flag.png");
-/* harmony import */ var _img_spriteRunLeft_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../img/spriteRunLeft.png */ "./src/img/spriteRunLeft.png");
-/* harmony import */ var _img_spriteRunRight_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../img/spriteRunRight.png */ "./src/img/spriteRunRight.png");
-/* harmony import */ var _img_spriteStandLeft_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../img/spriteStandLeft.png */ "./src/img/spriteStandLeft.png");
-/* harmony import */ var _img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../img/spriteStandRight.png */ "./src/img/spriteStandRight.png");
-/* harmony import */ var _function_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./function.js */ "./src/js/function.js");
-/* harmony import */ var _Player_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Player.js */ "./src/js/Player.js");
-/* harmony import */ var _Platform_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Platform.js */ "./src/js/Platform.js");
-/* harmony import */ var _Obstacle_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Obstacle.js */ "./src/js/Obstacle.js");
-/* harmony import */ var _GenericObject_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./GenericObject.js */ "./src/js/GenericObject.js");
+/* harmony import */ var _img_playercommand_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../img/playercommand.png */ "./src/img/playercommand.png");
+/* harmony import */ var _img_spriteRunLeft_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../img/spriteRunLeft.png */ "./src/img/spriteRunLeft.png");
+/* harmony import */ var _img_spriteRunRight_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../img/spriteRunRight.png */ "./src/img/spriteRunRight.png");
+/* harmony import */ var _img_spriteStandLeft_png__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../img/spriteStandLeft.png */ "./src/img/spriteStandLeft.png");
+/* harmony import */ var _img_spriteStandRight_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../img/spriteStandRight.png */ "./src/img/spriteStandRight.png");
+/* harmony import */ var _function_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./function.js */ "./src/js/function.js");
+/* harmony import */ var _Player_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Player.js */ "./src/js/Player.js");
+/* harmony import */ var _Platform_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Platform.js */ "./src/js/Platform.js");
+/* harmony import */ var _Obstacle_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Obstacle.js */ "./src/js/Obstacle.js");
+/* harmony import */ var _GenericObject_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./GenericObject.js */ "./src/js/GenericObject.js");
+
 
 
 
@@ -608,15 +610,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function fistLevel() {
-  var platformImage = (0,_function_js__WEBPACK_IMPORTED_MODULE_9__.createImage)(_img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"]);
-  var obstacleImage = (0,_function_js__WEBPACK_IMPORTED_MODULE_9__.createImage)(_img_obstacle_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
-  var backgroundImg = (0,_function_js__WEBPACK_IMPORTED_MODULE_9__.createImage)(_img_background_png__WEBPACK_IMPORTED_MODULE_1__["default"]);
-  var hillsImg = (0,_function_js__WEBPACK_IMPORTED_MODULE_9__.createImage)(_img_hills_png__WEBPACK_IMPORTED_MODULE_2__["default"]);
-  var endImg = (0,_function_js__WEBPACK_IMPORTED_MODULE_9__.createImage)(_img_flag_png__WEBPACK_IMPORTED_MODULE_4__["default"]);
+  var platformImage = (0,_function_js__WEBPACK_IMPORTED_MODULE_10__.createImage)(_img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"]);
+  var obstacleImage = (0,_function_js__WEBPACK_IMPORTED_MODULE_10__.createImage)(_img_obstacle_png__WEBPACK_IMPORTED_MODULE_3__["default"]);
+  var backgroundImg = (0,_function_js__WEBPACK_IMPORTED_MODULE_10__.createImage)(_img_background_png__WEBPACK_IMPORTED_MODULE_1__["default"]);
+  var hillsImg = (0,_function_js__WEBPACK_IMPORTED_MODULE_10__.createImage)(_img_hills_png__WEBPACK_IMPORTED_MODULE_2__["default"]);
+  var endImg = (0,_function_js__WEBPACK_IMPORTED_MODULE_10__.createImage)(_img_flag_png__WEBPACK_IMPORTED_MODULE_4__["default"]);
+  var playerComandImg = (0,_function_js__WEBPACK_IMPORTED_MODULE_10__.createImage)(_img_playercommand_png__WEBPACK_IMPORTED_MODULE_5__["default"]);
   var obstacles = [];
   var platforms = [];
   var genericObjects = [];
-  var player = new _Player_js__WEBPACK_IMPORTED_MODULE_10__.Player();
+  var player = new _Player_js__WEBPACK_IMPORTED_MODULE_11__.Player();
   var scrollOffset = 0;
   var endOfTheGame = 7640;
   obstacles = [
@@ -626,13 +629,13 @@ function fistLevel() {
   platforms = [];
   for (var i = 0; i < 14; i++) {
     if (i <= 3) {
-      platforms.push(new _Platform_js__WEBPACK_IMPORTED_MODULE_11__.Platform({
+      platforms.push(new _Platform_js__WEBPACK_IMPORTED_MODULE_12__.Platform({
         x: (platformImage.width + 190) * i,
         y: 480 - 100 * i,
         image: platformImage
       }));
     } else {
-      platforms.push(new _Platform_js__WEBPACK_IMPORTED_MODULE_11__.Platform({
+      platforms.push(new _Platform_js__WEBPACK_IMPORTED_MODULE_12__.Platform({
         x: (platformImage.width + 190) * i,
         y: 480,
         image: platformImage
@@ -641,18 +644,22 @@ function fistLevel() {
     //   platforms.push(new Platform({x: (platformImage.width + 190) * i  , y: 480, image: platformImage}),)
   }
   var positionXFlag = platforms[platforms.length - 1].position.x - 10;
-  genericObjects = [new _GenericObject_js__WEBPACK_IMPORTED_MODULE_13__.GenericObject({
+  genericObjects = [new _GenericObject_js__WEBPACK_IMPORTED_MODULE_14__.GenericObject({
     x: -1,
     y: -1,
     image: backgroundImg
-  }), new _GenericObject_js__WEBPACK_IMPORTED_MODULE_13__.GenericObject({
+  }), new _GenericObject_js__WEBPACK_IMPORTED_MODULE_14__.GenericObject({
     x: 5,
     y: 5,
     image: hillsImg
-  }), new _GenericObject_js__WEBPACK_IMPORTED_MODULE_13__.GenericObject({
+  }), new _GenericObject_js__WEBPACK_IMPORTED_MODULE_14__.GenericObject({
     x: 7000,
     y: 400,
     image: endImg
+  }), new _GenericObject_js__WEBPACK_IMPORTED_MODULE_14__.GenericObject({
+    x: 5,
+    y: 10,
+    image: playerComandImg
   })];
   return [obstacles, platforms, genericObjects, player, scrollOffset, endOfTheGame];
 }
@@ -726,6 +733,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + "2c30c9231d3ce0f7d337b08645859f97.png");
+
+/***/ }),
+
+/***/ "./src/img/playercommand.png":
+/*!***********************************!*\
+  !*** ./src/img/playercommand.png ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + "17b5fd3918a6a7d825977d80ce334ce3.png");
 
 /***/ }),
 
