@@ -32,7 +32,7 @@ function init(level){
     
     switch(level){
         case 'fistLevel':
-            [obstacles, platforms, genericObjects, player, scrollOffset] = fistLevel()
+            [obstacles, platforms, genericObjects, player, scrollOffset, endOfTheGame] = fistLevel()
             break;
     }
 //   
@@ -52,7 +52,7 @@ function init(level){
 
 
 
-let [obstacles, platforms, genericObjects, player, scrollOffset] = fistLevel()
+let [obstacles, platforms, genericObjects, player, scrollOffset, endOfTheGame] = fistLevel()
 player.update()
 
 
@@ -193,7 +193,7 @@ function animate(){
     
 
     // win 
-    if(scrollOffset > 7640){
+    if(scrollOffset > endOfTheGame){
         console.log('you win')
     }
 
@@ -201,6 +201,7 @@ function animate(){
     if(player.position.y > canvas.height){
       init('fistLevel')
     }
+    
 }
 const keys = {
     right: {
