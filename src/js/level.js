@@ -11,6 +11,7 @@ import spriteStandRight from '../img/spriteStandRight.png'
 
 import {createImage} from './function.js'
 
+
 import {Player} from './Player.js'
 import {Platform} from './Platform.js'
 import {Obstacle} from './Obstacle.js'
