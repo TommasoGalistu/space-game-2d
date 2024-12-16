@@ -69,7 +69,9 @@ Obiettivo
 
 Arriva alla fine del percorso senza cadere! 🎮
 
-A breve inserirò il link di gioco, per adesso puoi clonare la repository e esegui questi due comendi:
+Se vuoi provare il gioco clicca sul link: https://space-game-2d-js.netlify.app/
+
+Se invece vuoi implementare la repo, clona la repo e avvia 
 
 1. npm install
 2. npm start
