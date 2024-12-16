@@ -35,6 +35,10 @@ function init(level){
             [obstacles, platforms, genericObjects, player, scrollOffset, endOfTheGame] = fistLevel()
             break;
     }
+
+    keys.jump.pressed = false;
+    keys.left.pressed = false;
+    keys.right.pressed = false
 //   
 //   
 //   
@@ -193,8 +197,12 @@ function animate(){
     
 
     // win 
-    if(scrollOffset > endOfTheGame){
+    if(scrollOffset > endOfTheGame - 50){
         console.log('you win')
+        let playAgain = confirm('Hai vinto, vuoi ricominciare?')
+        if(playAgain){
+            init('fistLevel')
+        }
     }
 
     // lose

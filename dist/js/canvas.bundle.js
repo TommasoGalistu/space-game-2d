@@ -303,6 +303,9 @@ function init(level) {
       endOfTheGame = _fistLevel2[5];
       break;
   }
+  keys.jump.pressed = false;
+  keys.left.pressed = false;
+  keys.right.pressed = false;
   //   
   //   
   //   
@@ -409,9 +412,13 @@ function animate() {
   });
 
   // win 
-  if (scrollOffset > endOfTheGame) {
+  if (scrollOffset > endOfTheGame - 50) {
     var _console;
-    /* eslint-disable */(_console = console).log.apply(_console, _toConsumableArray(oo_oo("2592402647_197_8_197_30_4", 'you win')));
+    /* eslint-disable */(_console = console).log.apply(_console, _toConsumableArray(oo_oo("797742830_201_8_201_30_4", 'you win')));
+    var playAgain = confirm('Hai vinto, vuoi ricominciare?');
+    if (playAgain) {
+      init('fistLevel');
+    }
   }
 
   // lose
@@ -458,7 +465,7 @@ addEventListener('keydown', function (_ref) {
       keys.jump.pressed = true;
       player.velocity.y -= 20;
       /* eslint-disable */
-      (_console2 = console).log.apply(_console2, _toConsumableArray(oo_oo("2592402647_243_14_243_45_4", player.velocity.y)));
+      (_console2 = console).log.apply(_console2, _toConsumableArray(oo_oo("797742830_251_14_251_45_4", player.velocity.y)));
       break;
   }
 });
